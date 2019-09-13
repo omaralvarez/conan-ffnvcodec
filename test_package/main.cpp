@@ -3,7 +3,7 @@
 //  The Boost Software License 1.0
 //
 
-#include <dynlink_cuda.h>
+#include <ffnvcodec/dynlink_cuda.h>
 
 int main(void)
 {

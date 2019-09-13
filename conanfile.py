@@ -9,13 +9,22 @@ class ffnvcodecConan(ConanFile):
     repo_url = "https://github.com/FFmpeg/nv-codec-headers"
     topics = ("c", "header-only")
     generators = "cmake"
-    no_copy_source = True
 
     def source(self):
         self.run("git clone -b 'n%s' --single-branch --depth 1 %s" % (self.version, self.repo_url))
     
-    def package(self):
-        self.copy("*.h", dst="include", keep_path=False)
+    def build(self):
+        with tools.chdir("nv-codec-headers"):
+            autotools = AutoToolsBuildEnvironment(self)
+            #autotools.configure()
+            print(self.package_folder)
+            self.run('sed -e s#/usr/local#%s#g Makefile > Makefile.tmp' % self.package_folder)
+            self.run('mv Makefile.tmp Makefile')
+            autotools.make()
+            autotools.install()
+    
+    # def package(self):
+    #     self.copy("*.h", dst="include", keep_path=False)
 
     def package_id(self):
         self.info.header_only()
