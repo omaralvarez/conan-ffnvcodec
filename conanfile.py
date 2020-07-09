@@ -3,7 +3,7 @@ from conans import tools
 
 class ffnvcodecConan(ConanFile):
     name = "ffnvcodec"
-    version = "9.0.18.1"
+    version = "10.0.26.0"
     description = "nv-codec-headers for ffmpeg https://github.com/FFmpeg/nv-codec-headers"
     url = "https://github.com/omaralvarez/conan-ffnvcodec"
     repo_url = "https://github.com/FFmpeg/nv-codec-headers"
@@ -23,8 +23,5 @@ class ffnvcodecConan(ConanFile):
             autotools.make()
             autotools.install()
     
-    # def package(self):
-    #     self.copy("*.h", dst="include", keep_path=False)
-
     def package_id(self):
         self.info.header_only()
